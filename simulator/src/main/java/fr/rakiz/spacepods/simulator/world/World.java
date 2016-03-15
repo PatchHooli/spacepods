@@ -17,6 +17,7 @@ public class World implements Runnable {
     private static final double POD_MAX_ANGLE = Math.PI / 10;
     private static final long POD_MAX_SPEED = 200;
     private static final long POD_MASS = 100;
+    private static final double FRICTION = 0.85;
 
     private final SecureRandom m_random;
     public final int heightMax;
@@ -46,7 +47,7 @@ public class World implements Runnable {
             double x = (POD_SIZE * 6) + (m_random.nextDouble() * (heightMax - (POD_SIZE * 66)));
             double y = (POD_SIZE * 6) + (m_random.nextDouble() * (widthMax - (POD_SIZE * 6)));
 
-            pods.add(new Pod(new Point2D(x, y), new Vector2D(0, 0), POD_MAX_ANGLE, POD_MAX_SPEED, POD_MASS, POD_SIZE, CHECKPOINT_SIZE));
+            pods.add(new Pod(new Point2D(x, y), new Vector2D(0, 0), POD_MAX_ANGLE, POD_MAX_SPEED, POD_MASS, POD_SIZE, FRICTION));
         }
         m_players.put(player, pods);
     }

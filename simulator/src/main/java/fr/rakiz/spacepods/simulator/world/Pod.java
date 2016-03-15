@@ -56,14 +56,12 @@ class Pod implements Collisionable {
     }
 
     void calculateNextFrame(Point2D destination, long acceleration) {
-        Vector2D newDirection;
-        Vector2D expectedDirection = destination.sub(m_podInfos.m_position);
-        double newAngle = expectedDirection.angle();
-        if (Math.abs(newAngle) < m_maxAngle) {
-            newDirection = expectedDirection.sub(m_podInfos.m_speed);   // compensate speed!
-        } else {
-            newDirection = m_podInfos.m_speed.rotate(Math.copySign(m_maxAngle, newAngle));
-        }
+        Vector2D newDirection = destination.sub(m_podInfos.m_position);
+        // TODO: handle max rotation angle
+        //double angle = newDirection.angle() - m_podInfos.m_angle;
+        //if (Math.abs(newAngle) > m_maxAngle) {
+        //    newDirection = m_podInfos.m_speed.rotate(Math.copySign(m_maxAngle, newAngle));
+        //}
         Vector2D newAcceleration = newDirection.normalize().scale(acceleration);
         Vector2D newSpeed = m_podInfos.m_speed.add(newAcceleration).trunc();
         Point2D newPos = m_podInfos.m_position.add(newSpeed).round();
